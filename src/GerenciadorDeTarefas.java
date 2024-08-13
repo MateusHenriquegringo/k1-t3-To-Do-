@@ -7,7 +7,6 @@ public class GerenciadorDeTarefas {
 
     public void adicionarTarefa (Tarefa tarefa) {
         tarefas.add(tarefa);
-
         tarefas.sort(Comparator.comparing(Tarefa::getPrioridade).reversed());
     }
 
@@ -45,13 +44,13 @@ public class GerenciadorDeTarefas {
 
     public void exibirNumeroPeloStatus (){
 
-        var toDo = tarefas.stream().filter(tarefa -> tarefa.getStatus().equals("ToDo")).count();
+        var toDo = tarefas.stream().filter(tarefa -> tarefa.getStatus().equals("todo")).count();
         System.out.println("ToDo: "+toDo);
 
-        var doing = tarefas.stream().filter(tarefa -> tarefa.getStatus().equals("Doing")).count();
+        var doing = tarefas.stream().filter(tarefa -> tarefa.getStatus().equals("doing")).count();
         System.out.println("Doing: "+doing);
 
-        var done = tarefas.stream().filter(tarefa -> tarefa.getStatus().equals("Done")).count();
+        var done = tarefas.stream().filter(tarefa -> tarefa.getStatus().equals("done")).count();
         System.out.println("Done: "+done);
     }
 

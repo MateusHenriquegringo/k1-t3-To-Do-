@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Scanner;
 // Autor: Mateus Derossi
 // Este programa é uma aplicação simples para gerenciamento de tarefas, permitindo a criação, deleção, listagem e contagem de tarefas por status.
@@ -11,11 +12,42 @@ public class Main {
 
         while (true) {
             printMenu();
-            String choice = scanner.nextLine();
+            String input = scanner.nextLine();
 
-            switch (choice) {
+            switch (input) {
                 case "1":
-                    adicionarTarefa();
+                    System.out.print("Nome: ");
+                    String nome = scanner.nextLine();
+                    System.out.print("Descricao: ");
+                    String descricao = scanner.nextLine();
+
+                    LocalDate data = null;
+                    boolean dataValida = false;
+                    while (!dataValida) {
+                        System.out.print("Data Limite (YYYY-MM-DD): ");
+                        try {
+                            data = LocalDate.parse(scanner.nextLine());
+                            dataValida = true;
+                        } catch (Exception e) {
+                            System.out.println("Formato de data incorreto. Tente novamente.");
+                        }
+                    }
+
+                    System.out.print("Prioridade (1-5): ");
+                    int prioridade = Integer.parseInt(scanner.nextLine());
+                    System.out.print("Categoria: ");
+                    String categoria = scanner.nextLine();
+                    System.out.print("Status (ToDo, Doing, Done): ");
+                    String status = scanner.nextLine().toLowerCase(Locale.ROOT);
+
+                    gerenciador.adicionarTarefa(new Tarefa.Builder()
+                            .status(status)
+                            .categoria(categoria)
+                            .dataFinal(data)
+                            .nome(nome)
+                            .descricao(descricao)
+                            .prioridade(prioridade)
+                            .build());
                     break;
                 case "2":
                     System.out.print("Id da tarefa a deletar: ");
@@ -48,29 +80,6 @@ public class Main {
         System.out.println("5. listar tarefa por status");
         System.out.println("6. exibir numero de tarefas por status");
 
-
-    }
-    private static void adicionarTarefa () {
-        System.out.print("Nome: ");
-        String nome = scanner.nextLine();
-        System.out.print("Descricao: ");
-        String descricao = scanner.nextLine();
-        System.out.print("Data Limite (YYYY-MM-DD): ");
-        LocalDate data = LocalDate.parse(scanner.nextLine());
-        System.out.print("Prioridade (1-5): ");
-        int prioridade = Integer.parseInt(scanner.nextLine());
-        System.out.print("Categoria: ");
-        String categoria = scanner.nextLine();
-        System.out.print("Status (ToDo, Doing, Done): ");
-        String status = scanner.nextLine();
-
-        gerenciador.adicionarTarefa(new Tarefa.Builder()
-                .status(status)
-                .categoria(categoria)
-                .dataFinal(data)
-                .nome(nome)
-                .prioridade(prioridade)
-                .build());
     }
 
 }
