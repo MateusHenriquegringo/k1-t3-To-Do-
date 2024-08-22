@@ -16,7 +16,7 @@ public class GerenciadorDeTarefas {
 
 
     public void listarTarefasPorCategoria () {
-        var ordenado = tarefas
+        List<Tarefa> ordenado = tarefas
                 .stream()
                 .sorted(Comparator.comparing(Tarefa::getCategoria))
                 .toList();
@@ -25,7 +25,7 @@ public class GerenciadorDeTarefas {
     }
 
     public void listarTarefasPorPrioridade () {
-        var ordenado = tarefas
+        List<Tarefa> ordenado = tarefas
                 .stream()
                 .sorted(Comparator.comparing(Tarefa::getPrioridade).reversed())
                 .toList();
@@ -34,7 +34,7 @@ public class GerenciadorDeTarefas {
     }
 
     public void listarTarefasPorStatus () {
-        var ordenado = tarefas
+        List<Tarefa> ordenado = tarefas
                 .stream()
                 .sorted(Comparator.comparing(Tarefa::getStatus).reversed())
                 .toList();
@@ -44,13 +44,13 @@ public class GerenciadorDeTarefas {
 
     public void exibirNumeroPeloStatus (){
 
-        var toDo = tarefas.stream().filter(tarefa -> tarefa.getStatus().equals("todo")).count();
+        long toDo = tarefas.stream().filter(tarefa -> tarefa.getStatus().equals("todo")).count();
         System.out.println("ToDo: "+toDo);
 
-        var doing = tarefas.stream().filter(tarefa -> tarefa.getStatus().equals("doing")).count();
+        long doing = tarefas.stream().filter(tarefa -> tarefa.getStatus().equals("doing")).count();
         System.out.println("Doing: "+doing);
 
-        var done = tarefas.stream().filter(tarefa -> tarefa.getStatus().equals("done")).count();
+        long done = tarefas.stream().filter(tarefa -> tarefa.getStatus().equals("done")).count();
         System.out.println("Done: "+done);
     }
 

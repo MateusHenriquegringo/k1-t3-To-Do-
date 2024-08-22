@@ -7,8 +7,9 @@ import java.util.Scanner;
 public class Main {
     private static final GerenciadorDeTarefas gerenciador=new GerenciadorDeTarefas();
     private static final Scanner scanner = new Scanner(System.in);
-    public static void main(String[] args) {
 
+
+    public static void main(String[] args) {
 
         while (true) {
             printMenu();
